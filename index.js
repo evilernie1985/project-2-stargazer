@@ -60,11 +60,13 @@ app.engine('handlebars', exphbs({defaultLayout: 'main', layoutsDir: path.join(__
 app.set('view engine', 'handlebars')
 
 // Routes =========================
-const index = require('./routes/index')
-const users = require('./routes/users')
+const index = require('./routes/index_routes')
+const users = require('./routes/users_routes')
+const apod = require('./routes/apod_routes')
 
 app.use('/', index)
 app.use('/users', users)
+app.use('/apod', apod)
 
 app.set('port', (process.env.PORT || 4000))
 
