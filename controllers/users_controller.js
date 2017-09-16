@@ -1,3 +1,4 @@
+const expressValidator = require('express-validator')
 const User = require('../models/User')
 
 function register (req, res) {
@@ -31,7 +32,7 @@ function register (req, res) {
       console.log(user)
     })
 
-    req.flash('successMessage', 'Success! Please log in.')
+    req.flash('successMessage', 'Success! Please sign in.')
 
     res.redirect('/users/login')
   }

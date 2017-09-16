@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 const bcrypt = require('bcrypt')
 
 const UserSchema = mongoose.Schema({
@@ -15,14 +16,20 @@ const UserSchema = mongoose.Schema({
   password: {
     type: String,
     required: true
-  }
+  },
+  apod: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Apod'
+  }]
 })
 
 const User = module.exports = mongoose.model('User', UserSchema)
 
 module.exports.createUser = function (newUser, callback) {
   bcrypt.genSalt(10, function (err, salt) {
+    if (err) throw err
     bcrypt.hash(newUser.password, salt, function (err, hash) {
+      if (err) throw err
       newUser.password = hash
       newUser.save(callback)
     })

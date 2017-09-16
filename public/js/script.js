@@ -3,8 +3,9 @@ $(document).ready(function () {
   // 2 methods = GET and POST
   var startDate
   var endDate
+  const $searchResults = $('#searchResults')
   const apiKey = 'acvEahbNOejE5424HVtjzQV3bxdhnEPsCNZI1LTK'
-  var $ul = $('.apod-list')
+  var $ul = $('.searchResults')
 
   $('#searchButton').on('click', function (e) {
     e.preventDefault()
@@ -40,6 +41,28 @@ $(document).ready(function () {
         // var $createdList = createList(apod)
         $ul.append($newLi)
       })
+    })
+  })
+
+// Save APOD search results to DB
+  $searchResults.on('click', '.addBttn', function (e) {
+    e.preventDefault()
+
+    const bttn = $(this)
+    var newApod = {
+      title: bttn.data('title'),
+      date: bttn.data('date'),
+      image: bttn.data('image'),
+      description: bttn.data('description'),
+      reference: bttn.data('reference')
+    }
+
+    // send the ajax to own server
+
+    $.post('/apod', newApod).done(function (data) {
+      if (data.status === 'ok') {
+        alert('Hurray! ' + data.message)
+      }
     })
   })
 })

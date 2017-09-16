@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const exphbs = require('express-handlebars')
@@ -8,11 +9,12 @@ const cookieParser = require('cookie-parser')
 const flash = require('connect-flash')
 const session = require('express-session')
 const expressValidator = require('express-validator')
-app.use(expressValidator())
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const mongoose = require('mongoose')
 const MongoStore = require('connect-mongo')(session)
+const url = process.env.MONGODB_URI || 'mongodb://localhost:27017/wdi-project-2'
+
 
 // Set Static Assets Folder ===============
 
@@ -20,23 +22,38 @@ app.use(express.static('public'))
 
 // Connect to Mongodb ================
 
-mongoose.connect('mongodb://localhost/wdi-project-2')
+mongoose.Promise = global.Promise
+mongoose.connect(url, {
+  useMongoClient: true
+}).then(
+  function () { // resolve cb
+    console.log('connected successfully')
+  },
+  function (err) { // reject cb
+    console.log(err)
+  }
+)
 
 // Utility Middleware =======================
 
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(expressValidator())
 app.use(cookieParser())
 
 // Express Session =============
 
 app.use(session({
-  cookie: {maxAge: 60000},
   secret: 'shesellsseashells',
   resave: false,
-  saveUninitialized: true
-
+  saveUninitialized: false
+  // cookie: { secure: true }
 }))
+
+// Passport ========================
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 // Connect Flash ===============
 
@@ -48,11 +65,6 @@ app.use(function (req, res, next) {
   res.locals.user = req.user || null
   next()
 })
-
-// Passport ========================
-
-app.use(passport.initialize())
-app.use(passport.session())
 
 // Express Handlebars ================
 
