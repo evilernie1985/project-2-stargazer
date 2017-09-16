@@ -26,7 +26,11 @@ $(document).ready(function () {
         var $newPDate = $('<p>')
         var $newPTitle = $('<p>')
         var $newPExplanation = $('<p>')
-        var $linkbttn = $(`<button class="addBttn" data-date="${apod.date}" data-title="${apod.title}">Add</button>`)
+        var $linkbttn = $(`<button class="addBttn" data-date="${apod.date}"
+        data-title="${apod.title}"
+        data-image="${apod.url}"
+        data-description="${apod.explanation}"
+        >Add</button>`)
 
         $newPDate.text(apod.date)
         $newPTitle.text(apod.title)
@@ -53,8 +57,7 @@ $(document).ready(function () {
       title: bttn.data('title'),
       date: bttn.data('date'),
       image: bttn.data('image'),
-      description: bttn.data('description'),
-      reference: bttn.data('reference')
+      description: bttn.data('description')
     }
 
     // send the ajax to own server

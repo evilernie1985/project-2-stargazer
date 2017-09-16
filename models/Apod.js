@@ -17,9 +17,6 @@ const ApodSchema = new Schema({
   description: {
     type: String,
     required: true
-  },
-  reference: {
-    type: String
   }
 })
 
