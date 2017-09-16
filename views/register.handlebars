@@ -1,0 +1,26 @@
+{{#if errors}}
+      {{#each errors}}
+        <div class="alert alert-danger">
+          {{msg}}
+        </div>
+      {{/each}}
+{{/if}}
+
+
+<form class="form-register" action="/users/register" method="post">
+        <h2 class="form-register-heading">Register a new account</h2>
+
+        <label for="registerUsername">Username</label>
+        <input type="text" name="registerUsername" class="form-control" placeholder="Please enter your username" required autofocus>
+
+        <label for="registerEmail">Email address</label>
+        <input type="email" name="registerEmail" class="form-control" placeholder="Please enter your email address" required autofocus>
+
+        <label for="registerPassword">Password</label>
+        <input type="password" name="registerPassword" class="form-control" placeholder="Please enter your password" required>
+
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" name="confirmPassword" class="form-control" placeholder="Please confirm your password" required>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+      </form>
