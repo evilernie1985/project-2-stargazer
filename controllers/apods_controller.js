@@ -1,5 +1,38 @@
 const Apod = require('../models/Apod')
 
+function index (req, res) {
+  Apod.find({
+    'user': req.user._id
+  })
+  .populate('users')
+  .exec(function (err, apods) {
+    if (err) {
+      console.log(err)
+      return
+    }
+    // console.log(apods)
+    res.render('apods/index', {
+      allApods: apods
+    })
+  })
+}
+
+function show (req, res) {
+  Apod.findById(
+    req.params.id
+  )
+  .populate('user')
+  .exec(function (err, apod) {
+    if (err) {
+      console.log(err)
+    } else {
+      res.render('apods/show', {
+        apod: apod
+      })
+    }
+  })
+}
+
 function create (req, res) {
   var newApod = new Apod({
     title: req.body.title,
@@ -19,8 +52,8 @@ function create (req, res) {
   })
 }
 
-
-
 module.exports = {
+  index,
+  show,
   create
 }

@@ -74,11 +74,11 @@ app.set('view engine', 'handlebars')
 // Routes =========================
 const index = require('./routes/index_routes')
 const users = require('./routes/users_routes')
-const apod = require('./routes/apod_routes')
+const apods = require('./routes/apods_routes')
 
 app.use('/', index)
 app.use('/users', users)
-app.use('/apod', apod)
+app.use('/', apods)
 
 app.set('port', (process.env.PORT || 4000))
 
