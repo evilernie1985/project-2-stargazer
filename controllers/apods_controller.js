@@ -6,7 +6,7 @@ function create (req, res) {
     date: req.body.date,
     image: req.body.image,
     description: req.body.description,
-    reference: req.body.reference
+    user: req.user._id
   })
 
   newApod.save(function (err, newApod) {
@@ -18,6 +18,8 @@ function create (req, res) {
     })
   })
 }
+
+
 
 module.exports = {
   create

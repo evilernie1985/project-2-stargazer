@@ -16,12 +16,10 @@ const UserSchema = mongoose.Schema({
   password: {
     type: String,
     required: true
-  },
-  apod: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Apod'
-  }]
+  }
 })
+
+// const Apod = require('./Apod')
 
 const User = module.exports = mongoose.model('User', UserSchema)
 
