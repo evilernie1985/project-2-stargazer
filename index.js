@@ -6,6 +6,7 @@ const path = require('path')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
+const methodOverride = require('method-override')
 const flash = require('connect-flash')
 const session = require('express-session')
 const expressValidator = require('express-validator')
@@ -40,6 +41,7 @@ app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(expressValidator())
 app.use(cookieParser())
+app.use(methodOverride('_method'))
 
 // Express Session =============
 

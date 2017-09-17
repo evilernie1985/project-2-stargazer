@@ -52,8 +52,46 @@ function create (req, res) {
   })
 }
 
+function edit (req, res) {
+  Apod.findById(req.params.id, function (err, editApod) {
+    if (err) {
+      console.log(err)
+    } else {
+      res.render('./apods/edit', {
+        apod: editApod
+      })
+    }
+  })
+}
+
+function update (req, res) {
+  Apod.findByIdAndUpdate(req.params.id, {title: req.body.editApodTitle, description: req.body.editApodDescription}, {new: true}, function (err, updatedApod) {
+    if (err) {
+      console.log(err)
+    } else {
+      res.render('./apods/show', {
+        apod: updatedApod
+      })
+    }
+  })
+}
+
+function destroy (req, res) {
+  Apod.findByIdAndRemove(
+    req.params.id, function (err) {
+      if (err) {
+        console.log(err)
+      } else {
+        res.redirect('/apods')
+      }
+    })
+}
+
 module.exports = {
   index,
   show,
-  create
+  create,
+  edit,
+  update,
+  destroy
 }

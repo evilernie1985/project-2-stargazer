@@ -1,0 +1,11 @@
+<form action="/apods/{{apod._id}}?_method=patch" method="post">
+  <div class="form-group">
+    <label for="editApodTitle">Edit Title</label>
+    <input type="text" class="form-control" name="editApodTitle" value="{{apod.title}}" id="editApodTitle">
+  </div>
+  <div class="form-group">
+    <label for="editApodDescription">Edit Description</label>
+    <textarea class="form-control" rows=10 name="editApodDescription" id="editApodDescription">{{apod.description}}</textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

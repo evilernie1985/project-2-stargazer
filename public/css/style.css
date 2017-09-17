@@ -98,3 +98,8 @@ margin: 0px 5px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+.img-thumbnail {
+  height: 125px;
+  width: 125px;
+}

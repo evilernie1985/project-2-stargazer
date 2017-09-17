@@ -14,14 +14,16 @@ router.post('/apods', apodsController.create)
 
 router.get('/apods/:id', apodsController.show)
 
+// Apod Edit ======================
+
+router.get('/apods/:id/edit', apodsController.edit)
 
 // Apod Update ==================
 
-
+router.patch('/apods/:id', apodsController.update)
 
 // Apod Destroy =================
 
-
-
+router.delete('/apods/:id', apodsController.destroy)
 
 module.exports = router
