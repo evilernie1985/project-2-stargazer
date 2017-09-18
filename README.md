@@ -32,7 +32,7 @@ Nope.
 
 ## Live Version
 
-Launch: https://nameless-anchorage-52570.herokuapp.com/
+Launch: https://project-2-stargazer.herokuapp.com/
 
 ## Built With
 
