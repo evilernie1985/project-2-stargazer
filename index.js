@@ -14,6 +14,7 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const mongoose = require('mongoose')
 const MongoStore = require('connect-mongo')(session)
+
 const url = process.env.MONGODB_URI || 'mongodb://localhost:27017/wdi-project-2'
 
 // Set Static Assets Folder ===============
@@ -47,8 +48,10 @@ app.use(methodOverride('_method'))
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: false
-  // cookie: { secure: true }
+  saveUninitialized: false,
+  store: new MongoStore({
+    url: process.env.MONGODB_URI
+  })
 }))
 
 // Passport ========================
