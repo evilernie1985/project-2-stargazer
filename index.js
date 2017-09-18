@@ -90,9 +90,7 @@ app.use('/', index)
 app.use('/users', users)
 app.use('/', apods)
 
-app.set('port', (process.env.PORT || 4000))
-
-const port = 4000
+const port = process.env.PORT || 4000
 
 app.listen(port, function () {
   console.log('Express is running on port ' + port)
