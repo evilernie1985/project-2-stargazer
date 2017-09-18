@@ -16,7 +16,6 @@ const mongoose = require('mongoose')
 const MongoStore = require('connect-mongo')(session)
 const url = process.env.MONGODB_URI || 'mongodb://localhost:27017/wdi-project-2'
 
-
 // Set Static Assets Folder ===============
 
 app.use(express.static('public'))
@@ -46,7 +45,7 @@ app.use(methodOverride('_method'))
 // Express Session =============
 
 app.use(session({
-  secret: 'shesellsseashells',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false
   // cookie: { secure: true }
@@ -72,6 +71,12 @@ app.use(function (req, res, next) {
 
 app.engine('handlebars', exphbs({defaultLayout: 'main', layoutsDir: path.join(__dirname, '/views/layouts/')}))
 app.set('view engine', 'handlebars')
+
+// Local variables ====================
+
+app.locals = {
+  APOD_API_KEY: process.env.APOD_API_KEY
+}
 
 // Routes =========================
 const index = require('./routes/index_routes')

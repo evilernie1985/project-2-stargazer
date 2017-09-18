@@ -29,7 +29,6 @@ function register (req, res) {
 
     User.createUser(newUser, function (err, user) {
       if (err) throw err
-      console.log(user)
     })
 
     req.flash('successMessage', 'Success! Please sign in.')
